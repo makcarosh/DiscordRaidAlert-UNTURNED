@@ -129,7 +129,7 @@ namespace DiscordRaidAlerts
             BarricadeManager.onDamageBarricadeRequested += OnDamageBarricadeRequested;
             StructureManager.onDamageStructureRequested += OnDamageStructureRequested;
 
-            Logger.Log("DiscordRaidAlerts загружен.");
+            Logger.Log("DiscordRaidAlerts is load!\nDeveloper discord: makcarosh");
         }
 
         protected override void Unload()
@@ -139,7 +139,7 @@ namespace DiscordRaidAlerts
 
             SavePlayersData();
 
-            Logger.Log("DiscordRaidAlerts выгружен.");
+            Logger.Log("DiscordRaidAlerts is unload!\nDeveloper discord: makcarosh");
         }
 
         private void LoadPlayersData()
