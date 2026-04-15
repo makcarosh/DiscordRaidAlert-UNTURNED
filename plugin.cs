@@ -253,7 +253,7 @@ namespace DiscordRaidAlerts
 
             return nearestNode?.locationName ?? "неизвестно";
         }
-
+        
         private void OnDamageBarricadeRequested(
             CSteamID instigatorSteamID,
             Transform barricadeTransform,
@@ -261,11 +261,12 @@ namespace DiscordRaidAlerts
             ref bool shouldAllow,
             EDamageOrigin damageOrigin)
         {
+
             if (!shouldAllow || barricadeTransform == null)
                 return;
 
             BarricadeDrop barricade = BarricadeManager.FindBarricadeByRootTransform(barricadeTransform);
-            if (barricade == null)
+            if (barricade == null || barricade.asset.type != EItemType.FARM || barricade.asset.type != EItemType.CHARGE || barricade.asset.type != EItemType.LIBRARY || barricade.asset.type != EItemType.TRAP)
                 return;
 
             uint currentHealth = barricade.GetServersideData().barricade.health;
@@ -274,7 +275,7 @@ namespace DiscordRaidAlerts
             {
                 CSteamID ownerID = new CSteamID(barricade.GetServersideData().owner);
                 HandleDestroyed(barricade.asset, ownerID, instigatorSteamID, barricade.model.position);
-            }
+            } 
         }
 
         private void OnDamageStructureRequested(
@@ -425,7 +426,7 @@ namespace DiscordRaidAlerts
                             Logger.LogError($"Не удалось получить ID канала из ответа Discord для {discordId}. Ответ: {createChannelResult}");
                             return;
                         }
-
+                        //------------
                         var messagePayload = new
                         {
                             content = message
